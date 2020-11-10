@@ -4,6 +4,7 @@ import subprocess
 import signal
 import psutil
 import asyncio
+import sys
 
 from django.db import models
 from django.utils.timezone import now
@@ -281,7 +282,7 @@ class ManageCommandData:
 
         args_str = ' '.join([str(a) for a in args])
         kwargs_str = ' '.join(['--{} {}'.format(key, value) for key, value in kwargs.items()])
-        call_cmd = ' '.join(['python', 'manage.py', manage_command_name, args_str, kwargs_str])
+        call_cmd = ' '.join([sys.executable, 'manage.py', manage_command_name, args_str, kwargs_str])
 
         with open(console_log_dir, 'w') as console_out_file:
             console_out_file.writelines(call_cmd)
